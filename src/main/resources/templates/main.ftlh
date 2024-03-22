@@ -1,11 +1,7 @@
-<!DOCTYPE html>
+<#ftl encoding='UTF-8'>
+<#import "parts/common.ftlh" as c>
 
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-
-    </head>
-    <body>
+<@c.page>
 <div>
     <form method="post">
         <input type="text" name="text" placeholder="Введите ФИО" />
@@ -15,18 +11,16 @@
 </div>
 
 <div>Список студентов</div>
-
 <form method="post" action="filter">
 <input type="text" name="filter">
 <button type="submit">Найти</button>
 </form>
-
-<ul>
-<th:block th:each="student : ${students}">
-[[${student.getGroup()}]] [[${student.getName()}]]
-    </br>
-    </th:block>
-    </ul>
-</body>
-
-</html>
+<#list students as student>
+    <div>
+        <b>${student.getGroup()}</b>
+<span>${student.getName()}</span>
+    </div>
+<#else >
+    Список пуст
+</#list>
+</@c.page>
